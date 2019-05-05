@@ -1,0 +1,6 @@
+<RCC>
+  <qresource>
+    <file>images/Add_List.png</file>
+    <file>images/Delete_File.png</file>
+  </qresource>
+</RCC>
