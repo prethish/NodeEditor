@@ -1,16 +1,21 @@
-from PySide import QtGui
+"""Paramter widget to display the parameters.
+TODO: display the values of the parameters.
+"""
+from Qt import QtWidgets
 
 
-class CustomComboBox(QtGui.QWidget):
-    """"""
+class CustomComboBox(QtWidgets.QWidget):
+    """Combobox with the text.
+    """
 
-    def __init__(self, text='default', items='Dummmy', parent=None):
+    def __init__(self, text='default',
+                 items='Dummmy', parent=None):
         """Constructor for CustomComboBox"""
         super(CustomComboBox, self).__init__(parent=parent)
-        self.layout = QtGui.QHBoxLayout()
+        self.layout = QtWidgets.QHBoxLayout()
         self.setLayout(self.layout)
-        self.label = QtGui.QLabel(text)
-        self.comboBox = QtGui.QComboBox()
+        self.label = QtWidgets.QLabel(text)
+        self.comboBox = QtWidgets.QComboBox()
         self.populateComboBox(items)
         self.layout.addWidget(self.label)
         self.layout.addWidget(self.comboBox)
@@ -20,22 +25,19 @@ class CustomComboBox(QtGui.QWidget):
         self.comboBox.addItems(items)
 
 
-class Parameter(QtGui.QWidget):
-    """
+class Parameter(QtWidgets.QWidget):
+    """ Parameter Widget.
     """
 
     def __init__(self, parent=None):
         """
-
-        Args:
-            parent:
         """
         super(Parameter, self).__init__(parent=parent)
-        self.layout = QtGui.QVBoxLayout()
+        self.layout = QtWidgets.QVBoxLayout()
         self.setLayout(self.layout)
-        self.grpBx = QtGui.QGroupBox('Parameters')
+        self.grpBx = QtWidgets.QGroupBox('Parameters')
         self.layout.addWidget(self.grpBx)
-        self.grpLayout = QtGui.QVBoxLayout()
+        self.grpLayout = QtWidgets.QVBoxLayout()
         self.inAttrs = CustomComboBox('In Attrs')
         self.outAttrs = CustomComboBox('out Attrs')
         self.grpLayout.addWidget(self.inAttrs)
@@ -46,10 +48,3 @@ class Parameter(QtGui.QWidget):
         self.grpBx.setTitle(nodeObj.name)
         self.inAttrs.populateComboBox(nodeObj.inAttrs)
         self.outAttrs.populateComboBox(nodeObj.outAttrs)
-
-
-if __name__ == '__main__':
-    application = QtGui.QApplication([])
-    widget = Parameter()
-    widget.show()
-    application.exec_()

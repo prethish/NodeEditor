@@ -1,3 +1,5 @@
+"""Links defines the line drawn between 2 knobs.
+"""
 from Qt import QtWidgets
 from Qt import QtCore
 from Qt import QtGui
@@ -5,92 +7,99 @@ from Qt.QtGui import QPen, QBrush
 
 
 class Link(QtWidgets.QGraphicsPathItem):
+    """Links defines the line drawn between 2 knobs.
     """
-    """
-
     def __init__(self,
                  pointA=None,
                  pointB=None,
                  knobA=None,
                  knobB=None):
-        """
+        """Init. Connect between 2 knobs/2 points.
+        We always draw a line between 2 points, in case
+        of a knob, the position is used the point.
 
-        Args:
-            pointA:
-            pointB:
+        Keyword Args:
+            pointA (QPointF): The first point.
+            pointB (QPointF): The second point.
+            knobA (knob.Knob): The first knob.
+            knobB (knob.Knob): The second knob.
         """
         super(Link, self).__init__()
         self.pointA = pointA or QtCore.QPointF(0, 0)
         self.pointB = pointB or QtCore.QPointF(0, 0)
         self.setSourceKnob(knobA)
         self.setDestinationKnob(knobB)
+        # Style
         self.brush = QBrush(QtCore.Qt.NoBrush)
         self.pen = QPen(QtCore.Qt.yellow)
         self.pen.setWidth(2)
         self.linkPath = None
-
         self.updatePath()
 
-    def __repr__(self):
+    def __str__(self):
+        """String representation for the link.
+
+        Returns:
+            str: The link details.
+        """
         return 'Link from {} to {}'.format(self.pointA, self.pointB)
 
     def setSourcePos(self, value):
+        """Setter for the first point.
+
+        Args:
+            value (QPointF):
+        """
         self.pointA = value
 
     def setDestinationPos(self, value):
+        """Setter for the second point.
+
+        Args:
+            value (QPointF):
+        """
         self.pointB = value
 
     def setSourceKnob(self, value):
+        """Setter for the first knob.
+
+        Args:
+            value (knob.Knob):
+        """
         self._knobA = value
 
     def setDestinationKnob(self, value):
+        """Setter for the second knob.
+
+        Args:
+            value (knob.Knob):
+        """
         self._knobB = value
 
     def updatePath(self):
+        """Draw the path between the points.
         """
-
-        """
+        # if knobs, get the position.
         if self._knobA:
             self.pointA = self._knobA.getPos()
 
         if self._knobB:
             self.pointB = self._knobB.getPos()
 
-        # if self._knobB and self._knobA:
-        #     self._knobA.appendLink(self)
-        #     self._knobB.appendLink(self)
-
         self.linkPath = QtGui.QPainterPath(self.pointA)
-
         self.linkPath.lineTo(self.pointB)
         self.update()
 
     def paint(self, painter, option, widget):
-        """
+        """Overriding the default paint.
+        Paints the contents of an item in local coordinates.
 
         Args:
-            painter:
-            option:
-            widget:
+            painter (QPainter):
+            option (QStyleOptionGraphicsItem):
+            widget (QWidget):
         """
         painter.setPen(self.pen)
         painter.setBrush(self.brush)
         self.setPath(self.linkPath)
         painter.drawPath(self.path())
-
-
-
-if __name__ == '__main__':
-    application = QtGui.QApplication([])
-    widget = QtGui.QGraphicsView()
-    scene = QtGui.QGraphicsScene()
-    scene.setItemIndexMethod(QtGui.QGraphicsScene.NoIndex)
-    scene.setSceneRect(0, 0, 400, 400)
-    scene.setBackgroundBrush(QBrush(QtCore.Qt.gray, QtCore.Qt.CrossPattern))
-    linkItem = Link(QtCore.QPointF(0, 0), QtCore.QPointF(100, 100))
-    linkItem.setDestinationPos(QtCore.QPointF(200, 150))
-    linkItem.updatePath()
-    scene.addItem(linkItem)
-    widget.setScene(scene)
-    widget.show()
-    application.exec_()
