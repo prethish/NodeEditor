@@ -5,6 +5,11 @@ where I got nodes created with varying inputs/ouptuts.
 
 [![demo](https://i.ytimg.com/vi/qoob_M8jYaY/2.jpg)](https://youtu.be/qoob_M8jYaY)
 
+### To execute
+```
+python /path/to/nodeEditor.py
+```
+
 ## Improvements:
 
 - https://github.com/LeGoffLoic/Nodz
