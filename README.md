@@ -2,7 +2,7 @@ The main goal of this project was to learn QGraphicsView and how to create a nod
 page http://austinjbaker.com/node-editor-prototype and then trying to implement it on my own. I was able to get to point
 where I got nodes created with varying inputs/ouptuts.
 
-<video>
+[![demo](https://i.ytimg.com/vi/qoob_M8jYaY/2.jpg)](https://youtu.be/qoob_M8jYaY)
 
 Improvements:
 
