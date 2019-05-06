@@ -7,7 +7,7 @@ where I got nodes created with varying inputs/ouptuts.
 
 ### To execute
 ```
-python /path/to/nodeEditor.py
+make ui
 ```
 
 ## Improvements:

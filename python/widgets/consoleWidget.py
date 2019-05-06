@@ -1,8 +1,8 @@
 """Simple textExit widget to display messages from other widgets.
 The messages are directed to the printOut slot.
 """
-from Qt import QtWidgets
-from Qt import QtCore
+from _core.Qt import QtWidgets
+from _core.Qt import QtCore
 
 
 class Console(QtWidgets.QWidget):

@@ -1,9 +1,9 @@
 """Node class represents the node shape and also
 defines how the knobs(input and output ports) are parented to main shape.
 """
-from Qt import QtWidgets
-from Qt import QtCore
-from Qt.QtGui import QPen, QBrush, QColor
+from _core.Qt import QtWidgets
+from _core.Qt import QtCore
+from _core.Qt.QtGui import QPen, QBrush, QColor
 
 from knob import Knob
 

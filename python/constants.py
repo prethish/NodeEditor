@@ -1,3 +1,3 @@
 """Module to store variables that store const values.
 """
-STYLESHEET = 'nodeEditor.qss'
+STYLESHEET = 'resources/nodeEditor.qss'

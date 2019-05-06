@@ -3,7 +3,7 @@ hierarchy
 TODO: Implement this.
 """
 
-from Qt import QtWidgets, QtCore
+from _core.Qt import QtWidgets, QtCore
 
 
 class TreeModel(QtCore.QAbstractItemModel):

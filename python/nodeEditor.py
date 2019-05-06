@@ -1,15 +1,16 @@
 """nodeEditor module which contains QtMainWindow App and all the other QWidgets.
 """
-from Qt import QtWidgets
-from Qt import QtCore
-from Qt.QtGui import QPen, QBrush, QColor
+import os
+from _core.Qt import QtWidgets
+from _core.Qt import QtCore
+from _core.Qt.QtGui import QPen, QBrush, QColor
 
-from consoleWidget import Console
+from widgets.consoleWidget import Console
 from constants import STYLESHEET
-from node import Node
-from outlinerWidget import Outliner
-from parameterWidget import Parameter
-from toolbarWidget import ToolBar
+from widgets.node import Node
+from widgets.outlinerWidget import Outliner
+from widgets.parameterWidget import Parameter
+from widgets.toolbarWidget import ToolBar
 import resource
 
 
@@ -86,7 +87,11 @@ class NodeEditor(QtWidgets.QMainWindow):
             parent (QtWidget): The parent QtWidget. Defaults to None.
         """
         super(NodeEditor, self).__init__(parent=parent)
-        with open(STYLESHEET, "r") as fh:
+        stylesheet_path = os.path.join(
+            os.path.dirname(__file__),
+            STYLESHEET
+        )
+        with open(stylesheet_path, "r") as fh:
             self.setStyleSheet(fh.read())
         self.nodeView = NodeView()
         self.toolbar = ToolBar()

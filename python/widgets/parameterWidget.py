@@ -1,7 +1,7 @@
 """Paramter widget to display the parameters.
 TODO: display the values of the parameters.
 """
-from Qt import QtWidgets
+from _core.Qt import QtWidgets
 
 
 class CustomComboBox(QtWidgets.QWidget):
