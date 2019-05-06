@@ -5,5 +5,4 @@ AUTHORS = Prethish Bhasuran
 VERSION = 0.0.0
 
 ui:
-	@echo "Cleaning"
 	python python/nodeEditor.py
