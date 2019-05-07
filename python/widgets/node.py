@@ -5,7 +5,7 @@ from _core.Qt import QtWidgets
 from _core.Qt import QtCore
 from _core.Qt.QtGui import QPen, QBrush, QColor
 
-from knob import Knob
+from widgets.knob import Knob
 
 
 class Node(QtWidgets.QGraphicsObject):
