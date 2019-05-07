@@ -9,6 +9,9 @@ from _core.Qt.QtGui import QPen, QBrush
 class Link(QtWidgets.QGraphicsPathItem):
     """Links defines the line drawn between 2 knobs.
     """
+    # The interpolation value controls if the curve is smooth or not.
+    _interpolation = "linear"
+
     def __init__(self,
                  pointA=None,
                  pointB=None,
@@ -87,7 +90,20 @@ class Link(QtWidgets.QGraphicsPathItem):
             self.pointB = self._knobB.getPos()
 
         self.linkPath = QtGui.QPainterPath(self.pointA)
-        self.linkPath.lineTo(self.pointB)
+
+        if self._interpolation == "linear":
+            self.linkPath.lineTo(self.pointB)
+        else:
+            controlpoint = QtCore.QPointF(
+                (self.pointB - self.pointA).x() * 0.8,
+                0
+            )
+
+            self.linkPath.cubicTo(
+                self.pointA + controlpoint,
+                self.pointB - controlpoint,
+                self.pointB
+            )
         self.update()
 
     def paint(self, painter, option, widget):

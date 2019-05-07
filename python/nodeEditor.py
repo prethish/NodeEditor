@@ -1,13 +1,15 @@
 """nodeEditor module which contains QtMainWindow App and all the other QWidgets.
 """
 import os
+import itertools
 from _core.Qt import QtWidgets
 from _core.Qt import QtCore
 from _core.Qt.QtGui import QPen, QBrush, QColor
 
 from widgets.consoleWidget import Console
-from constants import STYLESHEET
+from constants import STYLESHEET, LINK_INTERPOLATION
 from widgets.node import Node
+from widgets.link import Link
 from widgets.outlinerWidget import Outliner
 from widgets.parameterWidget import Parameter
 from widgets.toolbarWidget import ToolBar
@@ -26,6 +28,7 @@ class NodeView(QtWidgets.QGraphicsView):
         """
         super(NodeView, self).__init__(parent=parent)
         scene = QtWidgets.QGraphicsScene(self)
+        self.__iterLinks = itertools.cycle(LINK_INTERPOLATION)
         # set indexing algorithm to NoIndex as its not a static scene
         scene.setItemIndexMethod(QtWidgets.QGraphicsScene.NoIndex)
         scene.setSceneRect(0, 0, 400, 400)
@@ -67,6 +70,16 @@ class NodeView(QtWidgets.QGraphicsView):
 
         for item in items:
             scene.removeItem(item)
+
+    def keyPressEvent(self, event):
+        """Overriding keyPress for the nodegraph
+
+        Args:
+            event (QEvent):
+        """
+        # Update all the link instances with new interpolation
+        if event.key() == QtCore.Qt.Key_L:
+            Link._interpolation = next(self.__iterLinks)
 
 
 class NodeEditor(QtWidgets.QMainWindow):
